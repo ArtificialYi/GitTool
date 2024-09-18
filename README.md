@@ -1,2 +1,3 @@
 # GitHook
-本地git开发hook
+## hook规则
+1. master不能push
