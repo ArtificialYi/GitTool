@@ -1,0 +1,8 @@
+#!/bin/sh
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+# 禁止master分支push
+if [ "$BRANCH" = "master" ]; then
+  echo "master branch is protected. Please use a fix/feat/del branch."
+  exit 1
+fi
