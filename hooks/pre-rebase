@@ -1,0 +1,21 @@
+#!/bin/sh
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# dev分支不能被rebase
+if [[ $1 == dev* ]] || [[ $1 == origin/dev* ]]; then
+  echo "The dev branch cannot be rebased."
+  exit 1
+fi
+
+# dev分支可以rebase非dev分支
+if [[ $BRANCH == dev* ]]; then
+  echo "The dev* branch can rebase non-dev branches."
+  exit
+fi
+
+# release分支只能在dev分支上rebase
+if [[ $1 == release* ]] || [[ $1 == origin/release* ]]; then
+  echo "The release branch can only be rebased onto the dev branch."
+  exit 1
+fi
