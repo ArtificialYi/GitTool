@@ -1,0 +1,15 @@
+#!/bin/sh
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# 禁止master分支commit
+if [ $BRANCH = master ]; then
+  echo "Using the commit command on the master branch is prohibited. The commit command is only supported on the fit/feat/del/dev branches."
+  exit 1
+fi
+
+# 禁止release分支commit
+if [[ $BRANCH == release* ]]; then
+  echo "Using the commit command on the release* branch is prohibited. The commit command is only supported on the fit/feat/del/dev branches."
+  exit 1
+fi

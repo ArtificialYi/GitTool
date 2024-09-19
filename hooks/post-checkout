@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# 当前分支
+Branch=$(git rev-parse --abbrev-ref HEAD)
+BranchBefore=$(git reflog | grep 'checkout:' | head -n 1 | awk '{print $6}')
+echo "$BranchBefore -> $Branch"
+
+# 两个分支commit不一样
+if [ $1 != $2 ]; then
+  exit
+fi
+
+# 自己前往自己
+if [ $Branch = $BranchBefore ]; then
+  exit
+fi
+
+# 不是release拉出分支 => OK
+if [[ $BranchBefore != release* ]]; then
+  exit
+fi
+
+# release2master => 正常
+if [ $Branch = master ]; then
+  exit
+fi
+
+# release2release => 删之前的
+if [[ $Branch == release* ]]; then
+  git branch -d $BranchBefore
+  echo "Creating a release branch from the release branch is equivalent to renaming."
+  exit
+fi
+
+# release2other => 拒绝
+git checkout $BranchBefore
+git branch -d $Branch
+echo "A branch cannot be created from the release."
+exit 1

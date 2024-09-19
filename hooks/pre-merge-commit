@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Do not use git merge; please use git rebase instead."
+git reset
+git restore .
+exit 1
