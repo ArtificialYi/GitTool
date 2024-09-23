@@ -5,7 +5,7 @@
 3. 所有分支之间不能merge
 4. dev分支不能被rebase
 5. 在dev分支上可以rebase所有非dev分支
-6. release分支只能在dev分支上rebase
+6. release分支只能在dev分支上被rebase
 7. 不能在release分支上创建分支
 
 ## 使用方式
