@@ -6,8 +6,8 @@ hook:
 # 脚本
 .PHONY:env-ln-init env-gitclean env-gitrbi
 env-ln-init:
-	sudo ln -sf $(shell pwd)/sh/usr_local_bin.sh /etc/profile.d/usr_local_bin.sh
+	ln -sf $(shell pwd)/sh/usr_local_bin.sh /etc/profile.d/usr_local_bin.sh
 env-gitclean: env-ln-init
-	sudo ln -sf $(shell pwd)/sh/gitclean.sh /usr/local/bin/gitclean
+	ln -sf $(shell pwd)/sh/gitclean.sh /usr/local/bin/gitclean
 env-gitrbi: env-ln-init
-	sudo ln -sf $(shell pwd)/sh/gitrbi.sh /usr/local/bin/gitrbi
+	ln -sf $(shell pwd)/sh/gitrbi.sh /usr/local/bin/gitrbi
